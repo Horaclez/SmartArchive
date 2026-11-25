@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SmartArchive</AssemblyName>
+    <RootNamespace>SmartArchive</RootNamespace>
+    <ApplicationIcon>..\..\assets\icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>Smart Archive</Product>
+    <Description>Compresor/descompresor inteligente: ZIP, RAR, 7z, contraseñas y vista previa.</Description>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- El SDK de WPF quita System.IO de los usings implícitos; lo volvemos a agregar -->
+    <Using Include="System.IO" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SharpCompress" Version="0.38.0" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2792.45" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\assets\icon.ico" Link="assets\icon.ico" />
+    <!-- 7zr.exe (LGPL) lo descarga el workflow de CI en /tools; si no existe, la opción .7z se oculta -->
+    <None Include="..\..\tools\7zr.exe" Link="7zr.exe" CopyToOutputDirectory="PreserveNewest" Condition="Exists('..\..\tools\7zr.exe')" />
+  </ItemGroup>
+</Project>
